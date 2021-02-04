@@ -1,0 +1,71 @@
+kubectl get nodes
+
+kubectl describe node master
+
+//get pods by label
+kubectl get pods -l app=nginx
+
+kubectl describe pod nginx-deployment-67594d6bf6-9gdvr
+
+//kubectl apply is recommanded, which can be used to create or update
+kubectl apply -f nginx-deployment.yaml
+kubectl replace -f nginx-deployment.yaml
+kubectl create -f nginx-deployment.yaml
+
+kubectl delete -f nginx-deployment.yaml
+
+kubectl exec -it nginx-deployment-5c678cfb6d-lg9lw -- /bin/bash
+
+//connect tty of shell container
+kubectl attach -it nginx -c shell
+
+kubectl create secret generic user --from-file=./username.txt
+
+kubectl get secrets
+
+kubectl create configmap ui-config --from-file=example/ui.properties
+
+//print configmap with yaml format
+kubectl get configmaps ui-config -o yaml
+
+kubectl get pod website -o yaml
+
+kubectl logs test-downwardapi-volume
+
+//scale pods number
+kubectl scale deployment nginx-deployment --replicas=4
+
+kubectl get deployments
+
+//create deployment with hisory record
+kubectl create -f nginx-deployment.yaml --record
+
+//check deployment status
+kubectl rollout status deployment/nginx-deployment
+
+//get replicatset
+kubectl get rs
+
+//update deployment on Etcd
+kubectl edit deployment/nginx-deployment
+
+//update image on deployment
+kubectl set image deployment/nginx-deployment nginx=nginx:1.91
+
+//rollback to last version
+kubectl rollout undo deployment/nginx-deployment
+
+//get history version of deployment
+kubectl rollout history deployment/nginx-deployment
+
+//rollback to version
+kubectl rollout history deployment/nginx-deployment --revision=2
+
+kubectl get service/svc
+
+kubectl get statefulset
+
+kubectl describe statefulset web
+
+//get Persistent Volume Claim
+kubectl get pvc
